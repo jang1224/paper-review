@@ -12,9 +12,9 @@ I-Haze, O-Haze, DenseHaze, NH-Haze 등
 
 1. 입력 이미지에서 내부 priors를 추출하여 사전 학습된 LDM(Latent Diffusion Model)이 중요한 영역에 집중하도록 프롬프트 제공
 2. Structure-Prompted Restorer를 통해 구조가 뚜렷한 영역에 집중하여 디테일 충실도를 높임
-- Structure-Prompted Restorer : 구조가 잘 보이는 영역을 강조해서 latent space에서 보존하게 유도
+    - Structure-Prompted Restorer : 구조가 잘 보이는 영역을 강조해서 latent space에서 보존하게 유도
 3. Haze-aware Refiner를 통해 깨끗한 영역과 출력 이미지 간의 정렬을 유도하고 색편향을 줄임
-- Haze-aware Refiner : 비교적 덜 흐린 영역을 기준으로 더 흐린 부분을 보정하도록 유도
+    - Haze-aware Refiner : 비교적 덜 흐린 영역을 기준으로 더 흐린 부분을 보정하도록 유도
 
 prompting으로 단순히 입력 이미지 외에 부가적인 정보를 줌
 
