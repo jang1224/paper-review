@@ -3,10 +3,11 @@
 [논문](https://arxiv.org/abs/2503.17488)
 
 ### 사용한 traning data set
-REalistic Single Image Dehazing (RESIDE):
-    → 안개 낀 이미지와 깨끗한 원본 이미지 쌍
+REalistic Single Image Dehazing (RESIDE)
+- 안개 낀 이미지와 깨끗한 원본 이미지 쌍
 I-Haze, O-Haze, DenseHaze, NH-Haze 등
-    → 전부 paired dataset
+- 전부 paired dataset
+
 ---
 ## 요약
 
