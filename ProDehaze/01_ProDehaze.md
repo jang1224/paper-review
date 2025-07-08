@@ -28,6 +28,8 @@ prompting으로 단순히 입력 이미지 외에 부가적인 정보를 줌
 - hallucination 문제 : 사전학습된 LDM은 외부 Data set에서 학습된 "자연 이미지 분포"를 기반으로 하므로, 실제 입력 이미지의 세부사항과 맞지 않는 구조나 색을 만들어내는 경우가 많음.
 
 prompt learning은 원래 NLP에서 개발된 것이지만, 최근에는 low-level vision tasks에도 적용되어 task 특화 priors를 활용할 수 있게 됨. 그러나 이러한 priors는 입력 이미지 내의 핵심 영역을 선택적으로 식별해 사전학습된 모델의 집중을 유도하는 능력이 부족하여, 그 효과가 희석되는 경우가 많음.
+- Prompt 학습 : 프롬프트(입력 지시문)를 최적화하여 사전학습된 모델의 성능을 특정 작업에 맞게 향상시키는 기법.
+- prior : 우리가 어떤 문제를 풀기 전에 미리 알고 있다고 가정하는 정보나 규칙.
 
 ---
 ## 문제 해결방안
@@ -120,6 +122,7 @@ SPR로 복원한 결과는 latent space에서는 충실도가 높지만, 최종 
 
 - `⊙`: 요소별 곱  
 - Q, K, V : attention 계산의 Query, Key, Value
+Window Swin Transformer(WST)를 활용한 것임.
 
 ### 최종 복원 이미지
 
@@ -140,9 +143,9 @@ SPR로 복원한 결과는 latent space에서는 충실도가 높지만, 최종 
 
 - **x_GT** : Ground truth 이미지  
 - **L_VGG** : VGG perceptual loss  
-  - 고수준 시각적 유사도를 반영  
+  - 고수준 시각적 유사도를 반영(CNN 기반)
 - **L_adv** : Adversarial loss  
-  - 생성 이미지를 더 진짜처럼 보이게 학습
+  - 생성 이미지를 더 진짜처럼 보이게 학습(GAN 기반)
 
 → HCR 학습 시 이 손실을 최소화함
 
@@ -150,7 +153,50 @@ SPR로 복원한 결과는 latent space에서는 충실도가 높지만, 최종 
 
 ## Experiments
 
-(내용 작성 예정)
+### 실험 결과 표
+
+![table1](./images/table1.png)
+
+### 데이터셋 설명
+
+I-Haze: 실내 장면에서 촬영된 실제 안개 이미지  
+O-Haze: 실외 장면에서 촬영된 실제 안개 이미지  
+DenseHaze: 매우 짙은 안개가 낀 실장면  
+NH-Haze: 다양한 자연 환경에서의 실제 안개 이미지  
+RTTS: Ground Truth가 없는, 현실 환경에서 직접 촬영된 안개 이미지로 구성된 비참조 평가용 데이터셋 (Non-reference)
+
+### Reference-based Metrics (정답 이미지가 있는 경우)
+
+PSNR (Peak Signal-to-Noise Ratio) ↑  
+: 밝기 및 노이즈 차이를 정량적으로 비교하는 지표로, 클수록 원본과 유사함
+
+SSIM (Structural Similarity Index) ↑  
+: 구조적 유사도를 측정하며, 사람의 시각 시스템을 모방한 지표
+
+CIEDE2000 ↓  
+: 색상 차이를 나타내는 지표로, 값이 작을수록 원본과 색이 비슷함
+
+### No-reference Metrics (정답 이미지가 없는 경우)
+
+CLIP-IQA ↑  
+: CLIP 모델을 활용해 추정한 이미지 품질 평가 점수
+
+NIMA (Neural Image Assessment) ↑  
+: 사람이 느끼는 품질을 예측한 모델 기반 점수
+
+### 시각적 비교 결과
+
+![fig2](./images/fig2.png)
+
+### Ablation Study(모듈별 성능 분석)
+
+![table2](./images/table2.png)
+
+다음과 같은 표를 보면 SPR과 HCR 둘 다 있어야 진짜 최고 성능이 나오는 것을 볼 수 있음.
+
+### 시각적 비교 결과
+
+![fig3](./images/fig3.png)
 
 ---
 
