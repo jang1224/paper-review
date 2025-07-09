@@ -124,6 +124,7 @@ SPR로 복원한 결과는 latent space에서는 충실도가 높지만, 최종 
 
 - `⊙`: 요소별 곱  
 - Q, K, V : attention 계산의 Query, Key, Value
+
 Window Swin Transformer(WST)를 활용한 것임.
 
 ### 최종 복원 이미지
@@ -133,7 +134,7 @@ Window Swin Transformer(WST)를 활용한 것임.
 ![최종 복원 과정](./images/image-9.png)
 
 - 디코더의 attention을 haze-aware prior로 조정하고,  
-  학습 가능한 refine network `R`를 통해 encoder의 feature `F_E(x_in)`와 decoder의 feature `F_D`를 정렬하여 최종 복원 이미지 `x_r` 생성
+  학습 가능한 refine network `R`를 통해 encoder의 feature `F_E(x_in)`와 decoder의 feature `F_D`를 비교/정렬/보정하여 최종 복원 이미지 `x_r` 생성
 
 ---
 
@@ -211,3 +212,9 @@ NIMA (Neural Image Assessment) ↑
     - 즉, 입력에서 **신뢰 가능한 영역만 참고**하도록 구조화됨
     - 게다가 ProDehaze는 다양한 안개 농도의 데이터를 포함해 학습했기 때문에, 새로운 안개 레벨도 복원 가능함  
       → **구조 + attention + 조건화** 전략이 강력한 복원 성능의 핵심
+
+2. **왜 고주파 성분을 추출하는가?**
+
+    - 안개는 low-frequency 성분에 강하게 작용해서 흐림을 유발함.
+    - 반면 high-frequency 성분은 경계/윤곽 같은 구조 정보를 담고 있음.
+    - 그래서 고주파만 따로 뽑아서 모델에게 이게 구조라고 prompt(힌트)로 주는 거임.
