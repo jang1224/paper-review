@@ -45,9 +45,9 @@ prompt learning은 원래 NLP에서 개발된 것이지만, 최근에는 low-lev
 ## Method
 
 ### Structure-Prompted Restorer(SPR, 구조 프롬프트 복원기)
-사전학습된 LDM은 rich semantics(풍부한 의미)를 Lantent 공간에 인코딩을 함. 이 공간에서 선택적인 내부 priors, 즉 fine structures(미세 구조), contours(윤곽선), edges(엣지) 등의 시각적 단서가 복원에 중요함. 이러한 구조들은 이미지 도메인보다는 주파수 도메인에서 더 명확하게 분리됨. 그래서 high-frequency prompts(HFE, 고주파 프롬프트)를 dehazing 과정의 가이드로 사용함.
+사전학습된 LDM은 rich semantics(풍부한 의미)를 Lantent 공간에 인코딩을 함. 이 공간에서 선택적인 내부 priors, 즉 fine structures(미세 구조), contours(윤곽선), edges(엣지) 등의 시각적 단서가 복원에 중요함. 이러한 구조들은 이미지 도메인보다는 주파수 도메인에서 더 명확하게 분리됨. 그래서 high-frequency Extrator(HFE, 고주파 특징 추출기)를 dehazing 과정의 가이드로 사용함.
 
-**HFE 추출**
+**HFE로 high-frequency prompt 추출**
 
 `x_high = conv_1x1 [ (GLH * x_in) ⊕ (GHH * x_in) ⊕ (GHL * x_in) ]`
 
