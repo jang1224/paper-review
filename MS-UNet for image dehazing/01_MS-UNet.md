@@ -4,6 +4,7 @@
 - SOTS 데이터셋
 
 총 550장의 실내 이미지로 500장은 합성된 안개 이미지, 50장은 안개 없는 이미지로 구성되어 있음
+
 ---
 
 ## 문제 제기
@@ -11,7 +12,7 @@
 
 - I(x): 안개 낀 이미지
 - J(x): 안개 없는(정상) 이미지
-- A: 대기광(global atmospheric light)
+- A: 대기광(global atmospheric light, 안개 때문에 추가로 섞이는 밝은 색)
 - t(x): 투과도(얼마나 많은 빛이 산란 없이 카메라에 도달하는지)
 
 기존 디헤이징 기법은 이미지 통계나 사전 지식을 활용하여 t(x)와 A를 추정한 뒤 이를 바탕으로 J(x)를 복원한다. 대표적으로는 다음과 같은 기법들이 있다.
@@ -26,6 +27,7 @@
 - 수작업으로 계산한 통계 기반 특징을 사용해서 병렬 처리에 부적합
 
 그래서 U-Net과 같은 데이터 기반의 딥러닝 방식이 주목받기 시작했다. 본 논문에서 소개하는 MS-UNet은 U-Net을 확장한 형태로 여러 스케일의 정보를 동시에 처리할 수 있도록 설계되어, 다양한 안개 패턴과 밀도에 잘 대응할 수 있다.
+
 ---
 
 ## MS-UNet의 특징
@@ -43,10 +45,11 @@
 
 본 논문에서는 자동 이미지 dehazing을 위한 Multi-branch feature 추출 및 재보정 메커니즘을 제안하며, 이는 Deep CNN 기반 아키텍처로 구성된다.
 네트워크는 기존 U-Net에서 인코딩 및 디코딩 각 단계에서 여러 스케일에서의 Convolution 연산을 수행하여 풍부한 공간 및 맥락 정보를 추출한다.
+
 ---
 
 **제안된 MS-UNet 구조**
-![fig1](./images/fig1)
+![fig1](./images/fig1.png)
 
 기존 단일 ConV층 대신, 각 단계마다 3개의 병렬 Convolutional branch를 사용하는 Multi-path feature 집계 방식을 도입했다. 각 branch는 서로 다른 receptive field(수용장)을 가지므로, 정밀한 local 특징과 넓은 맥락 정보를 동시에 추출할 수 있다. various branches의 출력은 element-wise addition(요소 단위 덧셈)으로 통합되어, dehazing 성능을 위한 효과적인 Multi-Scale feature 융합을 이룬다.
 
@@ -111,20 +114,47 @@ U-Net의 멀티스케일 설계는 3×3, 5×5, 7×7 크기의 컨볼루션 필�
 **학습 설정**
 
 Optimizer: Adam
+
 입력 패치 크기: 128×128
+
 배치 크기: 4
+
 초기 학습률: 1e-4
+
 Epoch: 70
+
 손실 함수: Binary Crossentropy + SSIM loss (정확도 + 시각 품질 모두 고려)
+
 (Binary Crossentropy : 이진 분류에서 정답과 예측 확률 사이의 오차를 로그 기반으로 계산해서, 모델이 확실하게 틀릴수록 큰 패널티를 주는 손실 함수)
+
 구현 프레임워크: PyTorch + GPU
 
 **Qualitative comparison of indoor images from the SOTS dataset**
 
 ![fig3](./images/fig3.png)
 
+![Table1](./images/table1.png)
 
-![alt text](image.png)
+DCP: 색 왜곡(color distortion) 발생
+
+AOD-Net: 잔여 안개(residual haze) 존재
+
+CAP, DeHazeNet: 일부 개선되었지만 여전히 선명도가 낮음
+
+GFN: 안개는 효과적으로 제거되었지만 색 균일도 부족, 어두운 영역에서 디테일 손실
+
+한편, 제안된 MS-UNet은:
+
+잔여 안개 없음
+
+디테일 보존
+
+색상 왜곡 없음
+
+Ground truth(정답)와 매우 유사한 결과 생성
+
+---
+
 ## 궁금증
 
 1. 가산 잔차(additive residual)랑 skip connection이랑 같은게 아닌가?
