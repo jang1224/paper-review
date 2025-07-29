@@ -159,16 +159,16 @@ Ground truth(정답)와 매우 유사한 결과 생성
 
 1. 가산 잔차(additive residual)랑 skip connection이랑 같은게 아닌가?
 
-- 가산 잔차는 하나의 블록에서 입력을 그대로 더하는 것 
+    - 가산 잔차는 하나의 블록에서 입력을 그대로 더하는 것 
 
-(목적 : 학습 안정화, gradient 흐름 유지, degradation 방지)
+    (목적 : 학습 안정화, gradient 흐름 유지, degradation 방지)
 
-- skip connection은 인코더의 feature map을 디코더로 concatenate 또는 add하는 것.
+    - skip connection은 인코더의 feature map을 디코더로 concatenate 또는 add하는 것.
 
-(목적 : 업샘플링 시 디테일 복원)
+    (목적 : 업샘플링 시 디테일 복원)
 
 2. PSNR은 높은데 LPIPS 높으면 어떻게 보일까?
 
-픽셀은 맞지만 시각적으로는 이상하게 블러처리된 것처럼 보일 수 있음
+    픽셀은 맞지만 시각적으로는 이상하게 블러처리된 것처럼 보일 수 있음
 
-PSNR과 SSIM이 낮고 LPIPS도 낮으면 구조는 다르지만 시각적 품질은 비슷하다는 뜻임.
+    PSNR과 SSIM이 낮고 LPIPS도 낮으면 구조는 다르지만 시각적 품질은 비슷하다는 뜻임.
