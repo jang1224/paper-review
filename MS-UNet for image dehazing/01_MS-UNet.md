@@ -161,11 +161,11 @@ Ground truth(정답)와 매우 유사한 결과 생성
 
     - 가산 잔차는 하나의 블록에서 입력을 그대로 더하는 것 
 
-    (목적 : 학습 안정화, gradient 흐름 유지, degradation 방지)
+        (목적 : 학습 안정화, gradient 흐름 유지, degradation 방지)
 
     - skip connection은 인코더의 feature map을 디코더로 concatenate 또는 add하는 것.
 
-    (목적 : 업샘플링 시 디테일 복원)
+        (목적 : 업샘플링 시 디테일 복원)
 
 2. PSNR은 높은데 LPIPS 높으면 어떻게 보일까?
 
