@@ -234,11 +234,10 @@ SOTS의 실외 흐림 이미지 500장 + 그에 대응하는 GT 이미지 500장
 → 안개가 거의 완전히 제거되고, 하늘 영역도 더 자연스럽고 밝음
 
 
-![table1](./images/table1/png)
+![table1](./images/table1.png)
 
 - PSNR은 DehazeNet이 가장 높지만,
 - SSIM은 제안한 다중 선형 회귀 DCP 모델이 최고치를 기록
-
 
 -> 기존 DCP 대비 PSNR은 5.3 향상
 
