@@ -37,7 +37,7 @@ SAM은 가중치 w 근처(반경 p) 어디로 살짝만 흔들어도 (train_time
 
 ![train_loss](./images/train_loss.png)
 
-![population](./images/population.png)
+![population_loss](./images/population_loss.png)
 
 목표는 위의 식 Ls(w)를 이용해서, LD(w)가 낮은 w를 선택하는 것이다.
 
