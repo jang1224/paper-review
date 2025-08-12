@@ -37,6 +37,8 @@ SAM은 가중치 w 근처(반경 p) 어디로 살짝만 흔들어도 (train_time
 
 ![train_loss](./images/train_loss.png)
 
+![population](./images/population.png)
+
 목표는 위의 식 Ls(w)를 이용해서, LD(w)가 낮은 w를 선택하는 것이다.
 
 일반적 접근은 Ls(w)를 LD(w)의 추정치로 삼아, minw Ls(w)를 SGD, Adam 등으로 최적화하는 것이다. 그러나 과매개변수화된 현대 모델에서는 이 방식이 테스트 성능에서 최적을 보장하지 않는다. Ls(w)는 비블록이며, 여러 최소점이 있고, 같은 훈련 손실이어도 일반화는 크게 달라질 수 있아.
