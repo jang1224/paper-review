@@ -83,7 +83,7 @@ LS^SAM(w)를 최소화하기 위해, 우리는 내부 최대화를 통해 미분
 
 최종 SAM 알고리즘은 표준 옵티마이저를 SAM 목적함수에 적용하되, 식(3)으로 기울기를 계산한다. 알고리즘 1은 SGD 기반으로 한 의사코드를 보여준 것이고, 그림 2는 한 번의 SAM 업데이트를 개략적으로 보여준 것이다.
 
-![algorithm](./images/algorithm.png)
+![algorithm1](./images/algorithm1.png)
 ![fig2](./images/fig2.png)
 
 ## 실증 평가
