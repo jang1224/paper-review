@@ -108,7 +108,7 @@ PyramidNet+ShakeDrop+CIFAR-100에서 10.3% 오류로, 추가 데이터 없이 �
 
 ![table2](./images/table2.png)
 
-esNet-50/101/152, 입력 224, 배치 4096, 초기 LR 1.0, 코사인 스케줄, SGD+0.9 모멘텀, 라벨 스무딩 0.1, weight decay 1e-4. SAM은 
+ResNet-50/101/152, 입력 224, 배치 4096, 초기 LR 1.0, 코사인 스케줄, SGD+0.9 모멘텀, 라벨 스무딩 0.1, weight decay 1e-4. SAM은 
 𝜌=0.05(ResNet-50 100ep 그리드로 선택). TPUv3에서 최대 400ep 학습, top-1/5 오류(평균, 95% CI, 5회).
 
 결과 : 모든 깊이에서 일관 개선. ResNet-152 top-1 오류 20.3%→18.4%. 또한 SAM은 에폭을 늘려도 과적합 없이 정확도가 계속 향상. 반대로 비-SAM은 200→400ep에서 과적합.
